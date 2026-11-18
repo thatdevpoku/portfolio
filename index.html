@@ -1,0 +1,370 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Finbar Clarke Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a ship's cargo manifest. Each project is a manifest entry with a spec strip, then breakdowns. */
+:root{
+  --bg:#eef1f4; --panel:#ffffff; --ink:#151b24; --muted:#5a6575; --line:#cdd4dd;
+  --accent:#d9571b; --accent-soft:#fbe5d9; --tag:#e3e8ee;
+  --f-display:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f141b; --panel:#171e28; --ink:#e7ecf2; --muted:#9aa6b6; --line:#2a3443;
+  --accent:#f07a3d; --accent-soft:#3a2418; --tag:#222b38; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141b; --panel:#171e28; --ink:#e7ecf2; --muted:#9aa6b6; --line:#2a3443;
+  --accent:#f07a3d; --accent-soft:#3a2418; --tag:#222b38; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:960px;margin:0 auto;padding-block:48px 72px;display:flex;flex-direction:column;gap:64px}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* Header */
+header{display:flex;flex-direction:column;gap:20px}
+.callsign{display:flex;align-items:center;gap:10px}
+.callsign span{display:inline-block;width:10px;height:10px;background:var(--accent)}
+header h1{font-size:clamp(2.4rem,7vw,4.2rem);font-weight:700;letter-spacing:-.01em}
+header .lede{font-size:1.15rem;max-width:60ch;color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.btn{font-family:var(--f-mono);font-size:.85rem;padding:9px 14px;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink);text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:hover{border-color:var(--accent)}
+
+/* Manifest index */
+.index{border-top:2px solid var(--ink)}
+.index-row{display:grid;grid-template-columns:3.5rem 1fr auto;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.index-row:hover h3{color:var(--accent)}
+.index-row h3{font-size:1.15rem;font-weight:600}
+.index-row .sub{color:var(--muted);font-size:.92rem}
+.index-row > div{min-width:0}
+
+/* Project entries */
+.entry{display:flex;flex-direction:column;gap:22px;scroll-margin-top:24px}
+.entry-head{display:flex;flex-direction:column;gap:8px}
+.entry-head h2{font-size:clamp(1.8rem,4.5vw,2.5rem);font-weight:700}
+.entry-head p{max-width:65ch}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--line);background:var(--panel)}
+.spec div{padding:10px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0;min-width:0}
+.spec dt{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.spec dd{margin:2px 0 0;font-weight:500}
+.status{display:inline-flex;align-items:center;gap:6px}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.status.done::before{background:#3a9a5b}
+
+.media{aspect-ratio:16/9;max-width:100%;border:1px dashed var(--line);background:
+  repeating-linear-gradient(45deg,transparent 0 12px,var(--tag) 12px 13px),var(--panel);
+  display:grid;place-items:center;text-align:center;padding:16px}
+
+.gallery{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.gallery.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.gallery img{display:block;width:100%;height:auto;max-width:100%;border:1px solid var(--line);background:var(--panel)}
+.gallery .hero-shot{grid-column:1/-1}
+.gallery.single{grid-template-columns:minmax(0,560px)}
+.gallery figcaption{grid-column:1/-1}
+@media (max-width:560px){.gallery,.gallery.three{grid-template-columns:1fr}}
+.phones{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,220px));gap:16px;justify-content:start}
+.phones div{display:flex;flex-direction:column;gap:8px;min-width:0}
+.phones img{display:block;width:100%;height:auto;border-radius:18px;border:6px solid var(--ink);background:#111}
+@media (max-width:560px){.phones{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.phones img{border-width:3px;border-radius:10px}}
+.breakdowns{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card h3{font-size:1.1rem;font-weight:600}
+.card dl{margin:0;display:flex;flex-direction:column;gap:8px}
+.card dt{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.card dd{margin:0;font-size:.95rem}
+code{font-family:var(--f-mono);font-size:.86em;background:var(--tag);padding:1px 5px}
+
+.systems{display:flex;flex-wrap:wrap;gap:8px}
+.systems code{background:var(--accent-soft);color:var(--ink)}
+
+.lessons{border-left:3px solid var(--accent);padding:4px 0 4px 18px;display:flex;flex-direction:column;gap:8px;max-width:70ch}
+.lessons ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+
+.smallgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+
+/* Experience + skills */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px}
+.timeline{display:flex;flex-direction:column;gap:18px}
+.timeline div{display:flex;flex-direction:column;gap:2px}
+.skillset{display:flex;flex-wrap:wrap;gap:8px}
+.skillset span{background:var(--tag);padding:5px 10px;font-size:.9rem}
+.section-label{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.section-label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:.9rem}
+.contact{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+@media (prefers-reduced-motion:no-preference){.btn,.index-row h3{transition:color .15s,border-color .15s}}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="callsign mono"><span></span>thatdevpoku · Game developer · CS @ Loughborough</div>
+  <h1>Finbar Clarke</h1>
+  <p class="lede">I build first-person games in Unreal Engine 5: physics-driven flight, diegetic UI, and systems-heavy narrative games. First-year BSc Computer Science (with placement) at Loughborough University.</p>
+  <div class="links">
+    <a class="btn primary" href="https://thatdevpoku.itch.io" target="_blank" rel="noopener">Play my games on itch.io</a>
+    <a class="btn" href="https://www.linkedin.com/in/finbar-clarke-6846432ba" target="_blank" rel="noopener">LinkedIn</a>
+    <button class="btn" id="copy-email" type="button">Copy email</button>
+  </div>
+</header>
+
+<section aria-labelledby="manifest">
+  <h2 id="manifest" class="mono section-label">Manifest · 4 entries</h2>
+  <div class="index">
+    <a class="index-row" href="#space-hauler"><span class="mono">01</span><div><h3>Space Hauler</h3><p class="sub">6DOF space hauling sim with a walkable ship interior</p></div><span class="mono">UE5.8</span></a>
+    <a class="index-row" href="#relay"><span class="mono">02</span><div><h3>Relay</h3><p class="sub">Narrative censorship puzzle game over 12 shifts</p></div><span class="mono">UE5.7</span></a>
+    <a class="index-row" href="#receipts"><span class="mono">03</span><div><h3>myReceipt</h3><p class="sub">Mobile app that turns paper receipts into scannable QR codes</p></div><span class="mono">React Native</span></a>
+    <a class="index-row" href="#fps"><span class="mono">04</span><div><h3>Imperial Sunrise</h3><p class="sub">Multiplayer FPS that balances luck against skill</p></div><span class="mono">itch.io</span></a>
+  </div>
+</section>
+
+<!-- 01 SPACE HAULER -->
+<article class="entry" id="space-hauler">
+  <div class="entry-head">
+    <span class="mono">Entry 01 · Flagship · In development</span>
+    <h2>Space Hauler</h2>
+    <p>A first-person space hauling simulator. You fly your own ship with full six-degrees-of-freedom Newtonian flight, then unbuckle and walk around the interior while it keeps moving. Missions cover cargo runs, salvage and mining.</p>
+  </div>
+  <dl class="spec">
+    <div><dt>Engine</dt><dd>Unreal Engine 5.8</dd></div>
+    <div><dt>Scripting</dt><dd>Blueprints</dd></div>
+    <div><dt>Platform</dt><dd>PC, mouse &amp; keyboard</dd></div>
+    <div><dt>Role</dt><dd>Solo: design &amp; systems</dd></div>
+    <div><dt>Status</dt><dd class="status">Active build</dd></div>
+  </dl>
+  <figure class="gallery">
+    <img class="hero-shot" src="img/sh-needlewake-front.jpg" alt="The Needlewake, a cream and grey hauler with a glass cockpit, hovering above a moon's horizon" width="1600" height="900">
+    <img src="img/sh-needlewake-rear.jpg" alt="Rear view of the Needlewake showing its twin engine pods with glowing blue thrusters" width="1600" height="854" loading="lazy">
+    <img src="img/sh-breakwater.jpg" alt="The Breakwater, a long heavy hauler with a cargo deck behind its cockpit" width="1600" height="660" loading="lazy">
+    <figcaption class="mono">Needlewake (front, rear) and Breakwater: two of the ten ship models, rendered in-engine</figcaption>
+  </figure>
+
+  <div class="breakdowns">
+    <section class="card">
+      <h3>Newtonian 6DOF flight</h3>
+      <dl>
+        <dt>Problem</dt><dd>Flight had to feel physical, yet still be controllable for players who don't want to fight momentum.</dd>
+        <dt>Approach</dt><dd>Physics-driven ship with a decoupled mode that preserves momentum, plus a coupled flight-assist toggle that brings velocity and rotation to zero. An autopilot holds attitude and velocity.</dd>
+        <dt>Learned</dt><dd>Mouse sensitivity amplified tiny jitter into cross-axis yaw; tuning input scaling mattered as much as the physics.</dd>
+      </dl>
+    </section>
+    <section class="card">
+      <h3>Walking on a moving ship</h3>
+      <dl>
+        <dt>Problem</dt><dd>The player has to walk around the interior while the ship moves and rotates, without being flung around or detached.</dd>
+        <dt>Approach</dt><dd>The interior acts as its own reference frame with artificial gravity toward the ship floor. Open space switches the player to zero-g 6DOF; an airlock handles the interior-to-EVA transition.</dd>
+        <dt>Learned</dt><dd>Prototyping this as a focused spike before building more systems on top saved rework.</dd>
+      </dl>
+    </section>
+    <section class="card">
+      <h3>Cockpit MFDs and holo HUD</h3>
+      <dl>
+        <dt>Problem</dt><dd>Ship information needed to live in the world, not on a flat overlay.</dd>
+        <dt>Approach</dt><dd>2–4 clickable cockpit screens per ship, each able to show any page, with the layout saved. Per-mode HUDs for combat, navigation and mining, and swappable colour palettes. Designed in Figma first.</dd>
+      </dl>
+    </section>
+    <section class="card">
+      <h3>Hardpoints, mining &amp; EVA</h3>
+      <dl>
+        <dt>Approach</dt><dd>Ships carry hardpoints for swappable engines, quantum drives and shields, browsed in a station parts showroom. Mining uses a charge mechanic where laser power must sit in each rock's safe window. EVA uses a Newtonian RCS suit with oxygen and propellant.</dd>
+        <dt>Decision</dt><dd>Moved from a modular ship builder to single modelled ships with hardpoints, trading flexibility for art quality and simpler physics.</dd>
+      </dl>
+    </section>
+  </div>
+</article>
+
+<!-- 02 RELAY -->
+<article class="entry" id="relay">
+  <div class="entry-head">
+    <span class="mono">Entry 02 · In development</span>
+    <h2>Relay</h2>
+    <p>A first-person narrative puzzle game set aboard an interstellar hauling ship. You work as a postal censor across 12 shifts, redacting letters and inspecting parcels, as the tone slides from bureaucratic routine into horror. Low-poly corporate-dystopia look.</p>
+  </div>
+  <dl class="spec">
+    <div><dt>Engine</dt><dd>Unreal Engine 5.7</dd></div>
+    <div><dt>Scripting</dt><dd>Blueprints, UMG</dd></div>
+    <div><dt>Content</dt><dd>42 letters · 22 objects</dd></div>
+    <div><dt>Endings</dt><dd>10</dd></div>
+    <div><dt>Status</dt><dd class="status">Core loop built</dd></div>
+  </dl>
+  <figure class="gallery three">
+    <img class="hero-shot" src="img/relay-mail.jpg" alt="Mail Review screen: a crew letter with one sentence blacked out, and Censor, Approve and Report buttons" width="1600" height="852">
+    <img src="img/relay-login.jpg" alt="Censor terminal sign-in screen warning that all sessions are monitored by the Oversight Bureau" width="1600" height="851" loading="lazy">
+    <img src="img/relay-objects.jpg" alt="Object Review screen listing pending parcels with details, specifications and Allow or Incinerate actions" width="1600" height="852" loading="lazy">
+    <img src="img/relay-summary.jpg" alt="End of shift summary with correct, incorrect and censored counts, wages, penalties and a compliance rating of 83 out of 100" width="1600" height="851" loading="lazy">
+    <figcaption class="mono">Mail Review, sign-in, Object Review and the end-of-shift report</figcaption>
+  </figure>
+
+  <div class="breakdowns">
+    <section class="card">
+      <h3>Word-level censorship</h3>
+      <dl>
+        <dt>Problem</dt><dd>Each word of a letter needed to be clickable and traceable back to its sentence, but Blueprint Maps can't hold arrays as values.</dd>
+        <dt>Approach</dt><dd>Letters are split into word buttons inside a WrapBox, tracked with two parallel arrays (button references and sentence indices) that stay in lockstep.</dd>
+      </dl>
+    </section>
+    <section class="card">
+      <h3>Unified task queue</h3>
+      <dl>
+        <dt>Problem</dt><dd>Separate mail and object queues made shift pacing hard to control.</dd>
+        <dt>Approach</dt><dd>Replaced both with a single queue of <code>S_Task</code> structs driven by the shift manager, so any task type can be sequenced in one place.</dd>
+      </dl>
+    </section>
+    <section class="card">
+      <h3>Branching endings</h3>
+      <dl>
+        <dt>Approach</dt><dd>Ten endings decided by an evaluator reading two running scores, Standing and Awareness, plus override flags set by specific items. Content lives in data tables, so writing new days needs no code changes.</dd>
+      </dl>
+    </section>
+    <section class="card">
+      <h3>The censor terminal</h3>
+      <dl>
+        <dt>Approach</dt><dd>The whole job runs through one in-world terminal with tabs for mail, objects, the crew database, logs and config. Letters can be censored, approved or reported to security; parcels are cleared or incinerated. Each shift ends with a report of correct calls, wages, penalties and a compliance rating, and there's a shop with four upgrades.</dd>
+      </dl>
+    </section>
+  </div>
+
+</article>
+
+<!-- 03 MYRECEIPT -->
+<article class="entry" id="receipts">
+  <div class="entry-head">
+    <span class="mono">Entry 03 · Completed</span>
+    <h2>myReceipt</h2>
+    <p>A mobile app that replaces paper receipts. The shop's till builds the receipt and shows it as a QR code; the customer scans it and the full itemised receipt is saved to their account, available offline and optionally synced to the cloud. It started from a simple problem: people lose or bin most of their paper receipts, then need them for returns, warranties and expenses.</p>
+  </div>
+  <dl class="spec">
+    <div><dt>Stack</dt><dd>React Native, Expo</dd></div>
+    <div><dt>Language</dt><dd>TypeScript</dd></div>
+    <div><dt>Backend</dt><dd>Firebase Auth, Firestore</dd></div>
+    <div><dt>Process</dt><dd>6 tested iterations</dd></div>
+    <div><dt>Status</dt><dd class="status done">Completed</dd></div>
+  </dl>
+
+  <figure class="phones">
+    <div><img src="img/mr-generator.jpg" alt="Generator screen listing premade items such as milk, bread and eggs with prices" width="313" height="696" loading="lazy"><figcaption class="mono">1 · Till picks items</figcaption></div>
+    <div><img src="img/mr-qr.jpg" alt="Generator screen showing the finished receipt and its QR code" width="320" height="712" loading="lazy"><figcaption class="mono">2 · Receipt becomes a QR</figcaption></div>
+    <div><img src="img/mr-log.jpg" alt="Receipt log showing a scanned Tesco receipt with itemised lines and a total of £5.30" width="289" height="641" loading="lazy"><figcaption class="mono">3 · Scanned into the log</figcaption></div>
+  </figure>
+
+  <div class="breakdowns">
+    <section class="card">
+      <h3>Receipts as QR codes</h3>
+      <dl>
+        <dt>Problem</dt><dd>Moving a whole receipt from a till to a phone, with no shared network or account between them.</dd>
+        <dt>Approach</dt><dd>The generator serialises the receipt (store, items, quantities, total, timestamp) to JSON and encodes it as a QR code. The camera screen scans it, parses and validates the fields, and rejects duplicates by receipt ID. Retailers can bulk-load their product list from a CSV.</dd>
+      </dl>
+    </section>
+    <section class="card">
+      <h3>Offline-first with optional cloud sync</h3>
+      <dl>
+        <dt>Approach</dt><dd>Receipts are stored on the device by default. With sync on, the log switches to a live Firestore listener scoped to the signed-in user, so changes appear across devices in real time, and the listener is torn down cleanly when sync is switched off.</dd>
+      </dl>
+    </section>
+    <section class="card">
+      <h3>Secure accounts</h3>
+      <dl>
+        <dt>Approach</dt><dd>Email sign-up and sign-in through Firebase Authentication, so passwords are never stored in plain text. Emails are normalised before sending, and auth error codes are turned into clear messages that don't leak account details.</dd>
+      </dl>
+    </section>
+    <section class="card">
+      <h3>Built and tested in iterations</h3>
+      <dl>
+        <dt>Approach</dt><dd>Six iterations: sign-in, QR scanning, receipt log, settings, generator, then navigation and readability. Each had its own success criteria, test table and usability check.</dd>
+        <dt>Feedback</dt><dd>User testing led to swipe navigation between tabs, a prompt when leaving settings unsaved, and clearer text and button sizing in both light and dark themes.</dd>
+      </dl>
+    </section>
+  </div>
+
+  <div class="lessons">
+    <span class="mono">Limitations and what's next</span>
+    <ul>
+      <li>It only reads QR codes made by its own generator, so it relies on shops adopting it.</li>
+      <li>Next: photo receipts with OCR to pull out the store, date and items, so paper receipts can be logged too.</li>
+      <li>A spending statistics screen is started but not finished.</li>
+    </ul>
+  </div>
+</article>
+
+<!-- 04 IMPERIAL SUNRISE -->
+<article class="entry" id="fps">
+  <div class="entry-head">
+    <span class="mono">Entry 04 · Playable build on itch.io</span>
+    <h2>Imperial Sunrise</h2>
+    <p>A multiplayer first-person shooter built around one design question: how do you balance luck against skill, so newer players get moments of success without taking away what makes good aim matter? It's an early, actively updated build, released publicly so people can play it and give feedback.</p>
+  </div>
+  <dl class="spec">
+    <div><dt>Genre</dt><dd>Multiplayer FPS</dd></div>
+    <div><dt>Platform</dt><dd>Windows</dd></div>
+    <div><dt>Build</dt><dd>0.0.3</dd></div>
+    <div><dt>Status</dt><dd class="status">Early access</dd></div>
+  </dl>
+  <figure class="gallery single">
+    <img src="img/fps.jpg" alt="Overhead view of the desert town map: sandstone buildings, rooftop crates and ladders between levels" width="867" height="696" loading="lazy">
+    <figcaption class="mono">The desert town map, with rooftop routes and ladders between levels</figcaption>
+  </figure>
+  <div class="breakdowns">
+    <section class="card">
+      <h3>Latest build</h3>
+      <dl>
+        <dt>Changes</dt><dd>Fixed a floating-weapon bug and crosshair drift, added a new hit-marker sound and an in-game controls list, and rebalanced the weapons.</dd>
+        <dt>Known issue</dt><dd>The player's upper-body aim isn't replicated to other players yet.</dd>
+      </dl>
+    </section>
+    <section class="card">
+      <h3>Roadmap</h3>
+      <dl>
+        <dt>Next</dt><dd>A UI overhaul, more weapons, player names and more game modes.</dd>
+      </dl>
+      <a class="btn primary" href="https://thatdevpoku.itch.io/imperial-sunrise" target="_blank" rel="noopener" style="align-self:flex-start">Download on itch.io</a>
+    </section>
+  </div>
+</article>
+
+<!-- EXPERIENCE / SKILLS -->
+<section class="two" aria-label="Experience and skills">
+  <div>
+    <h2 class="mono section-label">Experience</h2>
+    <div class="timeline">
+      <div><span class="mono">Aug 2026</span><strong>IT work experience · PJ Hegarty &amp; Sons</strong><p>Shadowed the IT Business Partner on Azure, Active Directory and UniFi. Helped set up a Starlink network for site cabins on an HS2 site.</p></div>
+      <div><span class="mono">2024–2026</span><strong>A-Levels · St George's College</strong><p>Maths A, Physics B, Computer Science B</p></div>
+      <div><span class="mono">2026–2030</span><strong>BSc Computer Science with Placement Year</strong><p>Loughborough University</p></div>
+    </div>
+  </div>
+  <div>
+    <h2 class="mono section-label">Toolkit</h2>
+    <div class="skillset">
+      <span>Unreal Engine 5</span><span>Blueprints</span><span>UMG</span><span>Physics &amp; movement</span><span>Multiplayer</span><span>VR</span><span>Python</span><span>TypeScript</span><span>React Native</span><span>Firebase</span><span>SQL</span><span>Git</span><span>Linux</span><span>Figma</span><span>Blender</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Finbar Clarke · thatdevpoku</span>
+  <span class="contact"><span id="email-text">finbar.clarke1@gmail.com</span></span>
+</footer>
+</div>
+
+<script>
+document.getElementById('copy-email').addEventListener('click', function(){
+  var b=this, t='finbar.clarke1@gmail.com';
+  function done(msg){b.textContent=msg;setTimeout(function(){b.textContent='Copy email'},1600)}
+  try{navigator.clipboard.writeText(t).then(function(){done('Copied')},function(){sel()})}catch(e){sel()}
+  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('email-text'));var s=getSelection();s.removeAllRanges();s.addRange(r);done('Selected below')}
+});
+</script>
+
+</body></html>
